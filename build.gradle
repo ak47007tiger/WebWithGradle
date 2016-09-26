@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+repositories {
+    maven{
+            url 'https://repo1.maven.org/maven2'
+     }
+    mavenCentral()
+}
+
+dependencies {
+    compile "joda-time:joda-time:2.2"
+    compile 'mysql:mysql-connector-java:5.1.38'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
+
+sourceSets {
+    main {
+        java.srcDirs = ['src']
+    }
+}
+
+task copyJars(type: Copy) {
+  from configurations.runtime
+  into 'WebContent/WEB-INF/lib'
+}
